@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer>
-      <p>Ini Footer</p>
+      <p>@ASEAN Youth Forum - 2022</p>
     </footer>
   );
 };

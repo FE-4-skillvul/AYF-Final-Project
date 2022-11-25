@@ -8,8 +8,9 @@
 }
 
 .wrapper-main {
-  width: 97%;
+  width: 100%;
   margin: 0 auto;
+  padding-bottom: 3.1rem;
 }
 
 .App {
@@ -19,6 +20,7 @@
     rgba(107, 248, 173, 1) 35%,
     rgba(5, 206, 99, 1) 100%
   );
+  background-position: center;
 }
 
 .hero-header {
@@ -54,6 +56,11 @@
   gap: 2em;
 }
 
+.nav-pfp {
+  width: 50px;
+  height: 50px;
+}
+
 .profile-body {
   padding-top: 2em;
 }
@@ -61,7 +68,7 @@
 .hero-main {
   text-align: center;
   color: black;
-  margin-top: 6em;
+  margin-top: 5em;
 }
 
 .hero-main h2 {
@@ -138,6 +145,11 @@
   margin-top: 1vh;
 }
 
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
 footer {
   background-color: #138a36;
   color: white;
@@ -145,6 +157,6 @@ footer {
   padding: 1em;
   bottom: 0;
   width: 100%;
-  position: fixed;
-  height: 60px;
+  position: absolute;
+  height: 3.5rem;
 }
