@@ -3,7 +3,7 @@ import React from 'react'
 function About() {
   return (
     <div>
-      <div className="card mb-3" id="about">
+      <div className="card mb-3 shadow p-3 mb-5 bg-body rounded" id="about">
   <div className="row g-0">
     <div className="col-md-4">
       <img src="https://aseanyouthforum.org/wp-content/uploads/2019/03/Logo-Asean-Youth-Forum-HR-01-1.png" className="img-fluid rounded-start" alt="..."/>

@@ -33,3 +33,63 @@
   margin-left: 100px;
   margin-right: 100px;
 }
+
+/* #detail-user{
+  margin-left: 200px;
+  margin-right: 200px;
+  text-align: left;
+} */
+
+
+#profile-comment{
+  height: 30px;
+  vertical-align: middle;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.user img{
+  height: 38px;
+  width: 38px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.user{
+  display: flex;
+  overflow: hidden;
+  height: auto;
+  width: 100%;
+  /* margin-bottom: 12px; */
+  /* padding: 8px; */
+  margin : 0 auto;
+}
+
+.user .name{
+  font-weight: 600;
+  text-align: left;
+}
+
+/* .user-meta .day{
+  font-size: 5px;
+  font-weight: 100;
+} */
+
+#img-detail{
+  padding-top: 5px;
+}
+
+.card-title{
+  margin-top: 10px;
+}
+
+#detail{
+  width: 30rem;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+}
+
+/* textarea{
+  margin-bottom: 5px;
+} */
