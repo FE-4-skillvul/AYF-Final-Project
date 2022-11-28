@@ -1,0 +1,18 @@
+
+#jumbotron{
+  background-image: url(/../AYF-FinalProject/public/images/jumbotron-img.jpg);
+  top: 0;
+}
+
+@media only screen and (max-width: 375px){
+  #img-jumbotron{
+    display: none;
+  }  
+  }
+  
+  
+  @media only screen and (max-width: 768px) {
+    #img-jumbotron{
+    display: none;
+  }  
+  }
