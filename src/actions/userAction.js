@@ -11,7 +11,8 @@ export const GET_COUNTRY = "GET_COUNTRY"
 export const LOGIN = "LOGIN"
 export const GET_UNAME = "GET_UNAME"
 export const GET_CATEGORY = "GET_CATEGORY"
-
+export const GET_COMMENTS = "GET_COMMENTS"
+export const ADD_COMMENT = "ADD_COMMENT"
 export const getListUser = () =>{
     return (dispatch)=>{
         dispatch({
@@ -123,6 +124,47 @@ export const getCategory = () =>{
             .catch((err)=>{
                 dispatch({
                     type : GET_CATEGORY,
+                    payload: {
+                        loading: false,
+                        data: false,
+                        errorMessage: err.message
+                    }
+                })
+            })
+
+
+    }
+}
+
+export const getComments = (id) =>{
+    return (dispatch)=>{
+        dispatch({
+            type : GET_COMMENTS,
+            payload: {
+                loading: true,
+                data: false,
+                errorMessage: false
+            }
+        })
+
+        axios({
+            method : "GET",
+            url : `https://ayf28.up.railway.app/comments/${id}`,
+            timeout: 120000
+        })
+            .then((res)=>{
+                dispatch({
+                    type : GET_COMMENTS,
+                    payload: {
+                        loading: false,
+                        data: res.data,
+                        errorMessage: false
+                    }
+                })
+            })
+            .catch((err)=>{
+                dispatch({
+                    type : GET_COMMENTS,
                     payload: {
                         loading: false,
                         data: false,
@@ -253,6 +295,50 @@ export const addUser = (data) =>{
             .catch((err)=>{
                 dispatch({
                     type : ADD_USER,
+                    payload: {
+                        loading: false,
+                        data: false,
+                        errorMessage: err.message
+                    }
+                })
+            })
+
+
+    }
+}
+
+export const addComment = (data, id) =>{
+    const token = localStorage.getItem('TOKEN')
+    return (dispatch)=>{
+        dispatch({
+            type : ADD_COMMENT,
+            payload: {
+                loading: true,
+                data: false,
+                errorMessage: false
+            }
+        })
+
+        axios({
+            method : "POST",
+            url : `https://ayf28.up.railway.app/comments/${id}`,
+            timeout: 120000,
+            data: data,
+            headers : {Authorization: `Bearer ${token}`}
+        })
+            .then((res)=>{
+                dispatch({
+                    type : ADD_COMMENT,
+                    payload: {
+                        loading: false,
+                        data: res.data,
+                        errorMessage: false
+                    }
+                })
+            })
+            .catch((err)=>{
+                dispatch({
+                    type : ADD_COMMENT,
                     payload: {
                         loading: false,
                         data: false,

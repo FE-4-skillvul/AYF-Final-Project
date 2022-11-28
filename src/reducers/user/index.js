@@ -9,6 +9,8 @@ import {
   LOGIN,
   GET_UNAME,
   GET_CATEGORY,
+  GET_COMMENTS,
+  ADD_COMMENT,
 } from "../../actions/userAction";
 
 const initialState = {
@@ -49,6 +51,14 @@ const initialState = {
   getCategoryResult: false,
   getCategoryLoading: false,
   getCategoryError: false,
+
+  getCommentsResult: false,
+  getCommentsLoading: false,
+  getCommentsError: false,
+
+  addCommentsResult: false,
+  addCommentsLoading: false,
+  addCommentsError: false,
 };
 
 const user = (state = initialState, action) => {
@@ -59,6 +69,22 @@ const user = (state = initialState, action) => {
         getListUserResult: action.payload.data,
         getListUserLoading: action.payload.loading,
         getListUserError: action.payload.errorMessage,
+      };
+
+    case GET_COMMENTS:
+      return {
+        ...state,
+        getCommentsResult: action.payload.data,
+        getCommentsLoading: action.payload.loading,
+        getCommentsError: action.payload.errorMessage,
+      };
+
+    case ADD_COMMENT:
+      return {
+        ...state,
+        addCommentsResult: action.payload.data,
+        addCommentsLoading: action.payload.loading,
+        addCommentsError: action.payload.errorMessage,
       };
 
     case GET_COUNTRY:
