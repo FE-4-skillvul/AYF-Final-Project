@@ -10,13 +10,15 @@ import {
 import { formatDistance, subDays } from "date-fns";
 import BorderExample from "../Spinner";
 import { motion } from "framer-motion";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import moment from "moment";
 
 function Cards() {
+  const navigation = useNavigate()
   const [threads, setThreads] = useState([])
+  
   const {
     getListUserResult,
     getListUserLoading,
@@ -48,7 +50,10 @@ function Cards() {
     }
   }, [getListUserResult]);
 
-console.log(threads);
+  const handleDetail= (id) =>{
+    navigation(`/detail/${id}`)
+  }
+  console.log(threads);
   return (
     <>
       <motion.div
@@ -61,7 +66,7 @@ console.log(threads);
           <div class="row d-flex justify-content-center">
             <h3 className="text-center mt-5 mb-3">Threads List</h3>
             {threads ? (
-              threads.map((x) => {
+              threads.filter((e)=>e.isPublish===false).map((x) => {
                 let createdAt = moment(x.createdAt).fromNow(true);
                 return (
                   <>
@@ -77,7 +82,7 @@ console.log(threads);
                                     src="../../images/user.png"
                                     alt=""
                                   />{" "}
-                                  {x.author}
+                                  {x.author.username}
                                 </Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">
                                   {createdAt} ago
@@ -86,7 +91,7 @@ console.log(threads);
                                   <h5>{x.title}</h5>
                                 </Card.Text>
                               </Card.Body>
-                              <Button variant="success">See Details</Button>
+                              <Button variant="success" onClick={()=>handleDetail(x._id)}>See Details</Button>
                             </Card>
                           </div>
                   </>

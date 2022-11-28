@@ -15,6 +15,7 @@ import Other from './pages/Other';
 import Profile from './pages/Profile';
 import Upload from './pages/Upload';
 import ErrorPage from './pages/ErrorPage';
+import DetailPageUser from './pages/DetailPageUser';
 function App() {
   return (
     <Router>
@@ -29,6 +30,7 @@ function App() {
      <Route path="/aboutpagelanding" element={<AboutPageLanding />}/>
      <Route path="/profile" element={<Profile />}/>
      <Route path="/upload" element={<Upload />}/>
+     <Route path="/detail/:id" element={<DetailPageUser />}/>
      <Route path='/home'>
             <Route index element={<Home/>}/>
             <Route path='mental' element={<MentalHealth/>}/>
