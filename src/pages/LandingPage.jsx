@@ -3,6 +3,7 @@ import NavbarLanding from '../components/NavbarLanding'
 import Hero from '../components/Hero'
 import Helps from '../components/Helps'
 import Country from '../components/Country'
+import Footer from '../components/footer/Footer'
 
 function LandingPage() {
   return (
@@ -19,6 +20,26 @@ function LandingPage() {
         <p>ASEAN COUNTRY</p>
       </div>
       <Country />
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <Footer />
     </>
   )
 }

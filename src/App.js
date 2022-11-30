@@ -4,6 +4,7 @@ import LandingPage from "./pages/LandingPage";
 import AboutPage from "./pages/AboutPage";
 import DetailPageUser from "./pages/DetailPageUser";
 import DetailPageAdmin from "./pages/DetailPageAdmin";
+import './components/footer/footer.css';
 
 function App() {
   return (
