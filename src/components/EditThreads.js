@@ -72,7 +72,7 @@ function EditThreads() {
       setPassword("");
     }
   }, [changePassResult, dispatch]);
- console.log(title);
+
   return (
     <>
       <Button

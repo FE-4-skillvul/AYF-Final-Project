@@ -26,7 +26,7 @@ function ProfileInfo() {
      setUserData (getUnameResult.data) 
     }
   }, [getUnameResult, dispatch]);
- console.log(getUnameResult.data);
+ 
   return (
     <>
       <div

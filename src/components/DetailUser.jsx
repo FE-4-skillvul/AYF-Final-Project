@@ -30,7 +30,7 @@ function DetailUser() {
   const filtered = threads.filter((e)=>e._id===id)
   
   const date = Date.now();
- console.log(admin);
+
   const {
     getListUserResult,
     getCommentsResult,
