@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getListUser, updatePublish, unPublish } from '../../actions/userAction';
+import { getListUser, updatePublish, unPublish, getUname } from '../../actions/userAction';
 import BorderExample from '../Spinner';
 import Button from 'react-bootstrap/Button';
 import {motion} from 'framer-motion'
@@ -11,13 +11,18 @@ function CardProfile() {
   const getLs = localStorage.getItem("USER_ID")
   const getProfile = JSON.parse(getLs)
   const id = getProfile.id
-  const { getListUserResult, getListUserLoading, getListUserError} = useSelector((state)=> state.UserReducer)
+  const { getListUserResult, getListUserLoading, getListUserError, getUnameResult} = useSelector((state)=> state.UserReducer)
     const dispatch = useDispatch();
 
     useEffect(()=>{
         dispatch(getListUser())
     }, [dispatch])
 
+    useEffect(()=>{
+      dispatch(getUname())
+  }, [dispatch])
+
+    console.log(getUnameResult);
   return (
     <>
     <div className="container mt-5 mb-3 mx-auto text-center">

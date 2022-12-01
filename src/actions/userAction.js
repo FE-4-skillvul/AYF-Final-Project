@@ -1,4 +1,4 @@
-import { responsiveFontSizes } from "@mui/material"
+import { Alert, responsiveFontSizes } from "@mui/material"
 import axios from "axios"
 
 export const GET_LIST_USER = "GET_LIST_USER"
@@ -13,6 +13,10 @@ export const GET_UNAME = "GET_UNAME"
 export const GET_CATEGORY = "GET_CATEGORY"
 export const GET_COMMENTS = "GET_COMMENTS"
 export const ADD_COMMENT = "ADD_COMMENT"
+export const DELETE_POST = "DELETE_POST"
+export const CHANGE_PASS = "CHANGE_PASS"
+export const CHANGE_THREAD = "CHANGE_THREAD"
+
 export const getListUser = () =>{
     return (dispatch)=>{
         dispatch({
@@ -161,6 +165,7 @@ export const getComments = (id) =>{
                         errorMessage: false
                     }
                 })
+               
             })
             .catch((err)=>{
                 dispatch({
@@ -177,11 +182,55 @@ export const getComments = (id) =>{
     }
 }
 
+export const deletePost = (id, uid) =>{
+    const token = localStorage.getItem('TOKEN')
+    return (dispatch)=>{
+        dispatch({
+            type : DELETE_POST,
+            payload: {
+                loading: true,
+                data: false,
+                errorMessage: false
+            }
+        })
+
+        axios({
+            method : "DELETE",
+            url : `https://ayf28.up.railway.app/threads/${id}`,
+            data: {
+                user: `${uid}`
+              },
+            headers:{Authorization: `Bearer ${token}`},
+            timeout: 120000
+        })
+            .then((res)=>{
+                dispatch({
+                    type : DELETE_POST,
+                    payload: {
+                        loading: false,
+                        data: res.data,
+                        errorMessage: false
+                    }
+                })
+                alert(res.data.message);
+            })
+            .catch((err)=>{
+                dispatch({
+                    type : DELETE_POST,
+                    payload: {
+                        loading: false,
+                        data: false,
+                        errorMessage: err.message
+                    }
+                })
+            })
+
+
+    }
+}
+
 export const getUname = () =>{
     const token = localStorage.getItem('TOKEN')
-    const config = {
-        headers: { Authorization: `Bearer ${token}` }
-    };
     return (dispatch)=>{
         dispatch({
             type : GET_UNAME,
@@ -191,10 +240,12 @@ export const getUname = () =>{
                 errorMessage: false
             }
         })
-        axios.get( 
-            'https://ayf28.up.railway.app/users/',
-            config
-          )
+        axios({
+            method : "GET",
+            url : `https://ayf28.up.railway.app/users/`,
+            headers:{Authorization: `Bearer ${token}`},
+            timeout: 120000
+        })
             .then((res)=>{
                 dispatch({
                     type : GET_UNAME,
@@ -204,6 +255,8 @@ export const getUname = () =>{
                         errorMessage: false
                     }
                 })
+              
+               localStorage.setItem('UCreatedAt',res.data.data.createdAt)
             })
             .catch((err)=>{
                 dispatch({
@@ -259,6 +312,101 @@ export const addPost = (data) =>{
                         errorMessage: err.message
                     }
                 })
+                alert(err.response.data.message)
+            })
+
+
+    }
+}
+
+export const changePass = (data) =>{
+    const token = localStorage.getItem('TOKEN')
+   
+    return (dispatch)=>{
+        dispatch({
+            type : CHANGE_PASS,
+            payload: {
+                loading: true,
+                data: false,
+                errorMessage: false
+            }
+        })
+    
+        axios({
+            method : "PUT",
+            url : "https://ayf28.up.railway.app/users/change-password",
+            timeout: 120000,
+            data: data,
+            headers : {Authorization: `Bearer ${token}`}
+        })
+            .then((res)=>{
+                dispatch({
+                    type : CHANGE_PASS,
+                    payload: {
+                        loading: false,
+                        data: res.data,
+                        errorMessage: false
+                    }
+                })
+                alert(res.data.message)
+            })
+            .catch((err)=>{
+                dispatch({
+                    type : CHANGE_PASS,
+                    payload: {
+                        loading: false,
+                        data: false,
+                        errorMessage: err.message
+                    }
+                })
+                alert(err.response.data.message)
+            })
+
+
+    }
+}
+
+export const changeThread = (data, id) =>{
+    const token = localStorage.getItem('TOKEN')
+   
+    return (dispatch)=>{
+        dispatch({
+            type : CHANGE_THREAD,
+            payload: {
+                loading: true,
+                data: false,
+                errorMessage: false
+            }
+        })
+        axios({
+            method : "PUT",
+            url : "https://ayf28.up.railway.app/threads/"+id,
+            timeout: 120000,
+            data: data,
+            headers : {Authorization: `Bearer ${token}`}
+        })
+            .then((res)=>{
+                dispatch({
+                    type : CHANGE_THREAD,
+                    payload: {
+                        loading: false,
+                        data: res.data,
+                        errorMessage: false
+                    }
+                })
+                alert(res.data.message)
+              
+            })
+            .catch((err)=>{
+                dispatch({
+                    type : CHANGE_THREAD,
+                    payload: {
+                        loading: false,
+                        data: false,
+                        errorMessage: err.message
+                    }
+                })
+                alert(err.response.data.message)
             })
 
 
@@ -279,6 +427,7 @@ export const addUser = (data) =>{
         axios({
             method : "POST",
             url : "https://ayf28.up.railway.app/auth-users/register",
+            // headers: { "Content-Type": "multipart/form-data" },
             timeout: 120000,
             data: data
         })
@@ -301,6 +450,7 @@ export const addUser = (data) =>{
                         errorMessage: err.message
                     }
                 })
+                alert(err.response.data.message)
             })
 
 
@@ -379,8 +529,10 @@ export const login = (data) =>{
                 })
                
                 localStorage.setItem("TOKEN", res.data.data.token)
+                localStorage.setItem("RID",res.data.data.role);
                 localStorage.setItem("USERNAME", res.data.data.username)
-                if(res.data.data.role === '637c0221b2e1e083f01b0c43'){
+             
+                if(res.data.data.role === '6385e3cfce9651ed571871d9'){
                     window.location='/home'
                 }else{
                     window.location='/admin'
@@ -396,6 +548,7 @@ export const login = (data) =>{
                         errorMessage: err.message
                     }
                 })
+                alert(err.response.data.message)
             })
 
 
@@ -411,11 +564,15 @@ export const Logout = () =>{
                 data: deleteData
             }
         })
+        localStorage.removeItem("TOKEN")
+        localStorage.removeItem("USERNAME")
+        localStorage.removeItem("RID")
+        localStorage.removeItem("UCreatedAt")
     }
 }
 
 export const updatePublish = (id,uid) =>{
-    
+    const token = localStorage.getItem('TOKEN')
     return(dispatch)=>{
         //loading dispatch
         dispatch({
@@ -426,13 +583,14 @@ export const updatePublish = (id,uid) =>{
                 errorMessage:false
             }
         })
-        fetch(`https://63496bd50b382d796c86192b.mockapi.io/users/${uid}/threads/${id}`, {
+        fetch(`https://ayf28.up.railway.app/threads/${id}`, {
             method: 'PUT',
             body: JSON.stringify({
-                publish: true
+                isPublish: true
             }),
             headers: {
             'Content-type': 'application/json; charset=UTF-8',
+            'Authorization':`Bearer ${token}`
             },
         })
     .then((res) => res.json())
@@ -460,6 +618,7 @@ export const updatePublish = (id,uid) =>{
 }
 
 export const unPublish = (id,uid) =>{
+    const token = localStorage.getItem('TOKEN')
     return(dispatch)=>{
         //loading dispatch
         dispatch({
@@ -471,13 +630,14 @@ export const unPublish = (id,uid) =>{
             }
         })
 
-        fetch(`https://63496bd50b382d796c86192b.mockapi.io/users/${uid}/threads/${id}`, {
+        fetch(`https://ayf28.up.railway.app/threads/${id}`, {
             method: 'PUT',
             body: JSON.stringify({
-                publish: false
+                isPublish: false
             }),
             headers: {
             'Content-type': 'application/json; charset=UTF-8',
+            'Authorization':`Bearer ${token}`
             },
         })
     .then((res) => res.json())

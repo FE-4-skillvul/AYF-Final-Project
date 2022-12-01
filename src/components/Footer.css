@@ -1,0 +1,12 @@
+.footer{
+    width: 100%;
+    text-align: center;
+    /* padding: 10px 0; */
+    background-color: #034e0ace;
+    color: #fff;
+    margin-top: 30px;
+  }
+  .footer h4{
+    font-weight: 500;
+    color: #fff;
+  }

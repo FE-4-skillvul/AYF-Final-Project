@@ -8,7 +8,7 @@ function About() {
     transition={{ duration: 0.5 }}
     >
     <div className='container'>
-          <div className="card mb-3">
+          <div className="card rounded-08 shadow border-0 p-2">
   <div className="row g-0">
     <div className="col-md-4">
       <img src="https://aseanyouthforum.org/wp-content/uploads/2019/03/Logo-Asean-Youth-Forum-HR-01-1.png" className="img-fluid rounded-start" alt="..."/>

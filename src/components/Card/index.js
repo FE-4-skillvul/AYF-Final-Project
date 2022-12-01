@@ -1,11 +1,12 @@
 import Card from "react-bootstrap/Card";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   getListUser,
   updatePublish,
   unPublish,
-  getCategory
+  getCategory,
 } from "../../actions/userAction";
 import { formatDistance, subDays } from "date-fns";
 import BorderExample from "../Spinner";
@@ -14,17 +15,19 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import moment from "moment";
+import './card.css'
 
 function Cards() {
-  const navigation = useNavigate()
-  const [threads, setThreads] = useState([])
-  
+  const navigation = useNavigate();
+  const [threads, setThreads] = useState([]);
+  const [search, setSearch] = useState('')
+ 
   const {
     getListUserResult,
     getListUserLoading,
     getListUserError,
     updatePublishResult,
-    unPublishResult
+    unPublishResult,
   } = useSelector((state) => state.UserReducer);
   const dispatch = useDispatch();
 
@@ -50,10 +53,10 @@ function Cards() {
     }
   }, [getListUserResult]);
 
-  const handleDetail= (id) =>{
-    navigation(`/detail/${id}`)
-  }
-  console.log(threads);
+  const handleDetail = (id) => {
+    navigation(`/detail/${id}`);
+  };
+ 
   return (
     <>
       <motion.div
@@ -65,38 +68,65 @@ function Cards() {
         <div className="container py-5">
           <div class="row d-flex justify-content-center">
             <h3 className="text-center mt-5 mb-3">Threads List</h3>
+            <div className="search">
+            <Form id="form-search" className="d-flex col-lg-3 col-md-2 float-end">
+              <div className="row">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="input-sm col-xs-3"
+                style={{height:"40px"}}
+                aria-label="Search"  
+                onChange={(e) => setSearch(e.target.value)}
+              />
+               </div>
+             
+            </Form>
+            </div>
             {threads ? (
-              threads.filter((e)=>e.isPublish===false).map((x) => {
-                let createdAt = moment(x.createdAt).fromNow(true);
-                return (
-                  <>
-                    <div className="col-lg-4 col-md-12 d-flex justify-content-center mt-3">
-                            <Card
-                              className="card rounded-08 shadow border-0 p-2"
-                              style={{ height: "18rem", width: "18rem" }}
+              threads
+                .filter((e) => e.isPublish === false && e.title.toLowerCase().includes(search))
+                .map((x) => {
+                  let createdAt = moment(x.createdAt).fromNow(true);
+                  return (
+                    <>
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1 }}
+                        className="col-lg-4 col-md-12 d-flex justify-content-center mt-3"
+                      >
+                        <Card
+                          className="card rounded-08 shadow border-0 p-2"
+                          style={{ height: "18rem", width: "18rem" }}
+                        >
+                          <Card.Body>
+                            <Card.Title>{x.author.username}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">
+                              {createdAt} ago
+                            </Card.Subtitle>
+                            <Button
+                              id="cat"
+                              className="btn-sm"
+                              variant="success"
                             >
-                              <Card.Body>
-                                <Card.Title>
-                                  <img
-                                    style={{ height: "2rem", width: "2rem" }}
-                                    src="../../images/user.png"
-                                    alt=""
-                                  />{" "}
-                                  {x.author.username}
-                                </Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">
-                                  {createdAt} ago
-                                </Card.Subtitle>
-                                <Card.Text>
-                                  <h5>{x.title}</h5>
-                                </Card.Text>
-                              </Card.Body>
-                              <Button variant="success" onClick={()=>handleDetail(x._id)}>See Details</Button>
-                            </Card>
-                          </div>
-                  </>
-                );
-              })
+                              {x.category.category}
+                            </Button>
+                            <Card.Text>
+                              <h5>{x.title}</h5>
+                            </Card.Text>
+                          </Card.Body>
+                          <Button
+                            variant="success"
+                            onClick={() => handleDetail(x._id)}
+                          >
+                            See Details
+                          </Button>
+                        </Card>
+                      </motion.div>
+                    </>
+                  );
+                })
             ) : getListUserLoading ? (
               //  <p>Loading....</p>
               <div className="container text-center justify-content-center mt-5">

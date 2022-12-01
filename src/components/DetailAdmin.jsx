@@ -1,60 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-  getComments,
-  getListUser,
-  addComment,
-  updatePublish,
-  unPublish,
-  changeThread
-} from "../actions/userAction";
-import Form from "react-bootstrap/Form";
+import { getComments, getListUser, addComment } from "../actions/userAction";
 import moment from "moment";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import Dropdown from "react-bootstrap/Dropdown";
-import EditThreads from "./EditThreads";
-
-function DetailUser() {
-  const RID = "6385e3cace9651ed571871d7";
-  const getRID = localStorage.getItem("RID");
-  const admin = RID === getRID;
+function DetailAdmin() {
   const [threads, setThreads] = useState([]);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
-  const date = Date.now();
-
-  const {
-    getListUserResult,
-    getCommentsResult,
-    addCommentsResult,
-    updatePublishResult,
-    unPublishResult,
-    changeThreadResult
-  } = useSelector((state) => state.UserReducer);
+  const date = Date.now()
+  const { getListUserResult, getCommentsResult, addCommentsResult } = useSelector(
+    (state) => state.UserReducer
+  );
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getListUser());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (updatePublish()) {
-      dispatch(getListUser());
-    }
-  }, [updatePublishResult, dispatch]);
-
-  useEffect(() => {
-    if (unPublish()) {
-      dispatch(getListUser());
-    }
-  }, [unPublishResult, dispatch]);
-
-  useEffect(() => {
-    if (changeThreadResult) {
-      dispatch(getListUser());
-    }
-  }, [changeThreadResult, dispatch]);
 
   useEffect(() => {
     dispatch(getComments(id));
@@ -74,8 +35,8 @@ function DetailUser() {
 
   useEffect(() => {
     if (addCommentsResult) {
-      dispatch(getComments(id));
-      setComment("");
+      dispatch(getComments(id))
+      setComment('')
     }
   }, [addCommentsResult, dispatch]);
 
@@ -86,14 +47,14 @@ function DetailUser() {
     dispatch(
       addComment(
         {
-          comment: comment,
-          createdAt: date,
+        comment: comment,
+        createdAt: date,
         },
-        id
+      id
       )
     );
   };
- 
+
   return (
     <div className="container py-5">
       {threads
@@ -108,46 +69,12 @@ function DetailUser() {
               >
                 <div className="card-header bg-transparent border-success">
                   <div className="user">
+                    
                     <div className="user-meta">
                       <div className="name">{x.author.username}</div>
                       <div className="time">{createdAt} ago</div>
                     </div>
                   </div>
-                  {admin ? "":(
-                    <div id="dropdown" className="float-end">
-                    <Dropdown>
-                      <Dropdown.Toggle variant="white" id="dropdown-basic">
-                      <MoreHorizIcon />
-                      </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item>
-                         <EditThreads/>
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                   </div>
-                  )}
-                 
-                  {admin ? (
-                    <div id="publish">
-                      <p>Publish :</p>
-                      <Form.Check
-                        className="check"
-                        type="switch"
-                        id="custom-switch"
-                        checked={x.isPublish}
-                        onChange={() => {
-                          if (x.isPublish === false) {
-                            dispatch(updatePublish(x._id, x.author._id));
-                          } else {
-                            dispatch(unPublish(x._id, x.author._id));
-                          }
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
                 </div>
                 <div className="card-body text-brand text-start">
                   <h3 className="card-title">{x.title}</h3>
@@ -189,6 +116,7 @@ function DetailUser() {
                       <div class="card rounded-08 shadow border-0 mb-3 text-start">
                         <div className="card-header fs-6">
                           <div className="user">
+                            
                             <div className="user-meta">
                               <div className="name">
                                 {comment.user.username}
@@ -213,4 +141,4 @@ function DetailUser() {
   );
 }
 
-export default DetailUser;
+export default DetailAdmin;

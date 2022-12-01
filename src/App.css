@@ -260,6 +260,7 @@ select{
   bottom: 50px;
   right: 150px;
   position: fixed;
+  z-index: 2;
 }
 #ButtonPopUp {
   margin-left: 570px;
@@ -360,7 +361,9 @@ body {
   #ButtonPopUp {
     margin-left: 80px;
   }
-
+ #form-search{
+  margin-left: 200px;
+ }
   #ButtonPopUpLoggedIn {
     bottom: 80px;
     right: 10px;
@@ -421,6 +424,7 @@ body {
   text-align: left;
 }
 
+
 /* .user-meta .day{
   font-size: 5px;
   font-weight: 100;
@@ -440,6 +444,23 @@ body {
   float: none;
   margin-bottom: 10px;
 }
+#modal-title{
+  margin-left: 0px;
+}
+
+#publish{
+  margin-left: 320px;
+  display: flex;
+  font-weight: 500;
+  z-index: 2;
+  margin-top: -30px;
+}
+#custom-switch{
+  margin-left: -30px;
+}
+#dropdown{
+  margin-top: -50px;
+}
 @media only screen and (max-width: 375px){
 .select{
   display: flex;
@@ -450,12 +471,60 @@ body {
   margin-left: 40px;
 }
 
+#text{
+  margin-top: -30px;
+}
+#detail{
+  width: 20rem;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+}
+#publish{
+  margin-left: 150px;
+  display: flex;
+  font-weight: 500;
+  z-index: 2;
+}
+#custom-switch{
+  margin-left: -30px;
+}
 }
 
-
-@media only screen and (min-width: 768px) {
+#dropdown-basic.dropdown-toggle.btn.btn-white::after {
+  display: none;
+}
+@media only screen and (max-width: 768px) {
   .select{
     display: none;
   }
-  
+  .wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto 320px; /* the bottom margin is the negative value of the footer's height */
+}
+  .footer{
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #034e0ace;
+    color: #fff;
+    margin-top: 230px;
+  }
+  #detail{
+    width: 20rem;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+  }
+  #publish{
+    margin-left: 150px;
+    display: flex;
+    font-weight: 500;
+    z-index: 2;
+  }
+  #custom-switch{
+    margin-left: -30px;
+  }
 }

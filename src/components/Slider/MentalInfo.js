@@ -6,30 +6,23 @@ import {
   getUname
 } from "../../actions/userAction";
 import { useEffect, useState } from 'react';
-
-function UncontrolledExample() {
-  const [userData, setUserData] = useState([])
+import "./slide.css";
+function MentalInfo() {
+  const uname = localStorage.getItem("USERNAME");
   const dispatch = useDispatch();
-  const {
-    getUnameResult
-  } = useSelector((state) => state.UserReducer);
-  
-  useEffect(() => {
-    if (getUnameResult) {
-     setUserData (getUnameResult.data) 
-    }
-  }, [getUnameResult, dispatch]);
- console.log(userData);
+
   useEffect(() => {
     dispatch(getUname());
   }, [dispatch]);
-
+ 
   return (
    <>
-    <div id='jumbotron' className="mt-4 p-5 rounded-08 shadow border-0 text-white d-flex justify-content-between rounded w-75 mx-auto" style={{height:'250px'}}>
+    <div id='jumbotron' className="mt-4 p-5 bg-success text-white d-flex justify-content-between rounded w-75 mx-auto" style={{height:'250px'}}>
       <div id='text'>
-      <h1>Hi, {userData.username}</h1>
-      <h3>Welcome to ASEAN Youth Forum</h3>
+      <h1>Hi, {uname}</h1>
+      <h3>Mental Health Threads Page</h3>
+      <p>We trying to be your good listener for your Mental Health story</p>
+      
       </div>
       <div className="dark-overlay">
       <img id='img-jumbotron' className='mt-4' src="/../../images/youth.png" style={{height:'200px'}} alt="" />
@@ -40,4 +33,4 @@ function UncontrolledExample() {
   );
 }
 
-export default UncontrolledExample;
+export default MentalInfo;

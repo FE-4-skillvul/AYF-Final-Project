@@ -11,13 +11,7 @@ const AddPost = () => {
   const HandleShowModal = () => {
     setIsModalShow(!isModalShow);
   };
-
-  
-
   const getLS = localStorage.getItem("TOKEN")
-
-  
-  
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [publish] = useState(false)
@@ -53,7 +47,6 @@ const AddPost = () => {
             type="button"
             id="ButtonPopUp"
             className="btn btn-success mt-3 btn-lg"
-            
         >
             Login to Post Threads
         </button>
@@ -89,6 +82,7 @@ const AddPost = () => {
                   onChange={(e)=>setContent(e.target.value)}
                   cols="30"
                   rows="10"
+                  minLength={20}
                   placeholder="Masukkan artikel disini"
                 ></textarea>
                 <div className="text-end">

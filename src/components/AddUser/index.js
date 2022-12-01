@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, getListCountry } from "../../actions/userAction";
+import FileBase from 'react-file-base64';
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -10,10 +11,12 @@ function AddUser() {
   const [password, setPassword] = useState("");
   const [country, setCountry] = useState("");
   const [asean, setAsean] = useState([]);
-  const [role] = useState("637c0221b2e1e083f01b0c43");
+
   const { addUserResult, getListCountryResult } = useSelector(
     (state) => state.UserReducer
   );
+
+ 
 
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
@@ -47,8 +50,6 @@ function AddUser() {
       setAsean(getListCountryResult.data);
     }
   }, [getListCountryResult]);
-
-  console.log(asean);
 
   return (
     <motion.div
@@ -86,6 +87,7 @@ function AddUser() {
                     />
                     <label htmlFor="floatingInput">Email address</label>
                   </div>
+                  
                   <div className="form-floating mb-3">
                     <input
                       type="username"
@@ -94,7 +96,7 @@ function AddUser() {
                       onChange={(e) => setUsername(e.target.value)}
                       name="username"
                       id="uname"
-                      min={8}
+                      minLength={8}
                       placeholder="Username"
                       required
                     />
@@ -104,11 +106,10 @@ function AddUser() {
                     <select
                       className="form-select mb-3"
                       aria-label="Default select example"
-                      value={country} onChange={(e)=>setCountry(e.target.value)}
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
                     >
-                       <option>
-                          Choose Your Country  
-                       </option>
+                      <option>Choose Your Country</option>
                       {asean.map((x, index) => {
                         return (
                           <option key={index} value={x._id}>
@@ -118,7 +119,7 @@ function AddUser() {
                       })}
                     </select>
                   </div>
-                  <input type="hidden" id="role" name="role" value={role} />
+
                   <div className="form-floating mb-3">
                     <input
                       type="password"
