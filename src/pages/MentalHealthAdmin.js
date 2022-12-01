@@ -57,7 +57,7 @@ function MentalHealthAdmin() {
     <>
       {admin ? <NavbarAdmin/> : <NavbarUser />}
       <div className="wrapper">
-        <AddPost />
+       
         <MentalInfo />
         <Outlet />
         <MentalCardAdmin />

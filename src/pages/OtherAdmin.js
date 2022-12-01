@@ -56,7 +56,7 @@ function OtherAdmin() {
     <>
       {admin ? <NavbarAdmin/> : <NavbarUser/>}
       <div className="wrapper">
-        <AddPost />
+       
         <OtherInfo />
         <OtherCardAdmin />
       </div>

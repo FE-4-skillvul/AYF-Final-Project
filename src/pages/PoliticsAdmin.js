@@ -57,7 +57,6 @@ function PoliticsAdmin() {
       {admin ? <NavbarAdmin /> : <NavbarUser />}
       <div className="wrapper">
         <PoliticsInfo />
-        <AddPost />
         <PoliticsCardAdmin />
       </div>
       <Footer />
