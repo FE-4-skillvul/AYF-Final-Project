@@ -1,4 +1,4 @@
-import Carousel from 'react-bootstrap/Carousel';
+
 import './slide.css'
 import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +19,7 @@ function UncontrolledExample() {
      setUserData (getUnameResult.data) 
     }
   }, [getUnameResult, dispatch]);
- console.log(userData);
+ 
   useEffect(() => {
     dispatch(getUname());
   }, [dispatch]);
@@ -32,7 +32,7 @@ function UncontrolledExample() {
       <h3>Welcome to ASEAN Youth Forum</h3>
       </div>
       <div className="dark-overlay">
-      <img id='img-jumbotron' className='mt-4' src="/../../images/youth.png" style={{height:'200px'}} alt="" />
+      <img id='img-jumbotron' className='mt-4' src="./../../images/youth.png" style={{height:'200px'}} alt="" />
       </div>
     </div>
 

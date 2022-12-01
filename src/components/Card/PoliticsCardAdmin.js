@@ -11,6 +11,7 @@ import {
 import { formatDistance, subDays } from "date-fns";
 import BorderExample from "../Spinner";
 import { motion } from "framer-motion";
+
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
