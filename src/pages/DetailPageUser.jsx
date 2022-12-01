@@ -8,6 +8,7 @@ function DetailPageUser() {
   const RID = '6385e3cace9651ed571871d7'
   const getRID = localStorage.getItem('RID')
   const admin = RID === getRID
+
   return (
     <div>
       {admin ? <NavbarAdmin/> : <NavbarUser/> }

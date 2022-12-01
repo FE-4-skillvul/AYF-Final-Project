@@ -16,14 +16,21 @@ import Dropdown from "react-bootstrap/Dropdown";
 import EditThreads from "./EditThreads";
 
 function DetailUser() {
+  const [UID, setUID] = useState('')
+  const getUNAME = localStorage.getItem("USERNAME");
+  const canDelete = UID === getUNAME;
   const RID = "6385e3cace9651ed571871d7";
   const getRID = localStorage.getItem("RID");
   const admin = RID === getRID;
   const [threads, setThreads] = useState([]);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
+  
+  const { id } = useParams();
+  const filtered = threads.filter((e)=>e._id===id)
+  
   const date = Date.now();
-
+ console.log(admin);
   const {
     getListUserResult,
     getCommentsResult,
@@ -37,6 +44,12 @@ function DetailUser() {
   useEffect(() => {
     dispatch(getListUser());
   }, [dispatch]);
+  
+  useEffect(() => {
+    if (getListUserResult) {
+      setUID(filtered.map((e)=> e.author.username).toString());
+    }
+  }, [getListUserResult]);
 
   useEffect(() => {
     if (updatePublish()) {
@@ -79,8 +92,8 @@ function DetailUser() {
     }
   }, [addCommentsResult, dispatch]);
 
-  const { id } = useParams();
-
+ 
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
@@ -94,6 +107,7 @@ function DetailUser() {
     );
   };
  
+  
   return (
     <div className="container py-5">
       {threads
@@ -113,7 +127,7 @@ function DetailUser() {
                       <div className="time">{createdAt} ago</div>
                     </div>
                   </div>
-                  {admin ? "":(
+                  {canDelete ? (
                     <div id="dropdown" className="float-end">
                     <Dropdown>
                       <Dropdown.Toggle variant="white" id="dropdown-basic">
@@ -126,7 +140,7 @@ function DetailUser() {
                       </Dropdown.Menu>
                     </Dropdown>
                    </div>
-                  )}
+                  ):""}
                  
                   {admin ? (
                     <div id="publish">

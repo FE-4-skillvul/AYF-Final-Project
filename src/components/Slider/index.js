@@ -19,7 +19,7 @@ function UncontrolledExample() {
      setUserData (getUnameResult.data) 
     }
   }, [getUnameResult, dispatch]);
- console.log(userData);
+ 
   useEffect(() => {
     dispatch(getUname());
   }, [dispatch]);
