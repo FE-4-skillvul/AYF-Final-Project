@@ -1,4 +1,4 @@
-import Carousel from 'react-bootstrap/Carousel';
+
 import './slide.css'
 import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux';

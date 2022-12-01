@@ -85,7 +85,7 @@ function Cards() {
             </div>
             {threads ? (
               threads
-                .filter((e) => e.isPublish === false && e.title.toLowerCase().includes(search))
+                .filter((e) => e.isPublish === true && e.title.toLowerCase().includes(search))
                 .map((x) => {
                   let createdAt = moment(x.createdAt).fromNow(true);
                   return (
