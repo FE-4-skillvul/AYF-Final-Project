@@ -32,7 +32,7 @@ function UncontrolledExample() {
       <h3>Welcome to ASEAN Youth Forum</h3>
       </div>
       <div className="dark-overlay">
-      <img id='img-jumbotron' className='mt-4' src="../../images/youth.png" style={{height:'200px'}} alt="" />
+      <img id='img-jumbotron' className='mt-4' src="./../../images/youth.png" style={{height:'200px'}} alt="" />
       </div>
     </div>
 
