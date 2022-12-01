@@ -11,6 +11,9 @@ import {
   GET_CATEGORY,
   GET_COMMENTS,
   ADD_COMMENT,
+  CHANGE_PASS,
+  DELETE_POST,
+  CHANGE_THREAD
 } from "../../actions/userAction";
 
 const initialState = {
@@ -59,6 +62,18 @@ const initialState = {
   addCommentsResult: false,
   addCommentsLoading: false,
   addCommentsError: false,
+
+  changePassResult: false,
+  changePassLoading: false,
+  changePassError: false,
+  
+  changeThreadResult: false,
+  changeThreadLoading: false,
+  changeThreadError: false,
+
+  deletePostResult: false,
+  deletePostLoading: false,
+  deletePostError: false,
 };
 
 const user = (state = initialState, action) => {
@@ -70,7 +85,27 @@ const user = (state = initialState, action) => {
         getListUserLoading: action.payload.loading,
         getListUserError: action.payload.errorMessage,
       };
-
+      case CHANGE_PASS:
+        return {
+          ...state,
+          changePassResult: action.payload.data,
+          changePassLoading: action.payload.loading,
+          changePassError: action.payload.errorMessage,
+        };
+        case CHANGE_THREAD:
+        return {
+          ...state,
+          changeThreadResult: action.payload.data,
+          changeThreadLoading: action.payload.loading,
+          changeThreadError: action.payload.errorMessage,
+        };
+        case DELETE_POST:
+        return {
+          ...state,
+          deletePostResult: action.payload.data,
+          deletePostLoading: action.payload.loading,
+          deletePostError: action.payload.errorMessage,
+        };
     case GET_COMMENTS:
       return {
         ...state,

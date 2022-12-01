@@ -10,7 +10,6 @@ function AboutPage() {
     <div>
         <NavbarUser />
         <h3 className="title-header text-white">About Us</h3>
-        <ParticlesBackground/>
         <About />
         <Footer />
     </div>

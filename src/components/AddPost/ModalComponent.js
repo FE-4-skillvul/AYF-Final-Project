@@ -5,16 +5,15 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost, getCategory } from "../../actions/userAction";
 
-const notify = () =>
-  toast.success("Threads Added.", {
-    duration: 4000,
-    position: "bottom-left",
-  });
-
 const ModalComponent = ({ show, HideHandler }) => {
   const { addPostResult, getCategoryResult } = useSelector(
     (state) => state.UserReducer
   );
+  const notify = () =>
+    toast.success("Threads Added.", {
+      duration: 4000,
+      position: "bottom-left",
+    });
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [theme, setTheme] = useState("");
@@ -42,12 +41,14 @@ const ModalComponent = ({ show, HideHandler }) => {
       dispatch(HideHandler);
       setTitle("");
       setContent("");
+      window.location='/home'
     }
   }, [addPostResult, dispatch]);
 
   useEffect(() => {
     dispatch(getCategory());
   }, [dispatch]);
+
   useEffect(() => {
     if (getCategoryResult) {
       setCategory(getCategoryResult.data);
@@ -88,9 +89,10 @@ const ModalComponent = ({ show, HideHandler }) => {
                 onChange={(e) => setTheme(e.target.value)}
                 required
               >
+                <option value="">Select Category</option>
                 {category.map((x, index) => {
                   return (
-                    <option key={index} value={x._id} defaultValue>
+                    <option key={index} value={x._id}>
                       {x.category}
                     </option>
                   );
@@ -106,15 +108,11 @@ const ModalComponent = ({ show, HideHandler }) => {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="Masukkan artikel disini"
-                maxLength={350}
+                minLength="20"
+                maxLength="350"
               ></textarea>
               <div className="text-end">
-                <button
-                  onClick={notify}
-                  type="submit"
-                  id="submit"
-                  className="btn btn-dark"
-                >
+                <button type="submit" id="submit" className="btn btn-dark">
                   <i className="fa-solid fa-plus">Add </i>
                   <Toaster />
                 </button>

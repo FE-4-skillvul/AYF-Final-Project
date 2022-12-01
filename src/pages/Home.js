@@ -43,14 +43,14 @@ function Home() {
  })
   return (
     <>
-    
     <NavbarUser />
     <Slider/>
     <AddPost/>
     <Topics/>
+    <Outlet/> 
     <Cards/>
     <Footer/>
-    <Outlet/> 
+    
     </>
   )
 }

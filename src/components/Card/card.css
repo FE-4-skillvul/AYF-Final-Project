@@ -1,0 +1,23 @@
+#form-search{
+    margin-right: -50px;
+}
+
+@media only screen and (max-width: 375px){
+    .search{
+        margin-right: 230px;
+    }
+    #form-search{
+        margin-left: 130px;
+    }
+    }
+    
+    
+    @media only screen and (max-width: 768px) {
+        .search{
+            margin-right: 280px;
+        }
+        #form-search{
+            margin-left: 130px;
+        }
+      
+    }
