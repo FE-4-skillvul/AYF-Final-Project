@@ -53,7 +53,7 @@ function OtherCard() {
   const handleDetail= (id) =>{
     navigation(`/detail/${id}`)
   }
-  console.log(threads);
+ 
   return (
     <>
       <motion.div
