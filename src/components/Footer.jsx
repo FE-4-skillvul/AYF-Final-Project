@@ -5,7 +5,7 @@ function Footer() {
   return (
     <div>
     <section className="footer">
-      <p className="fs-6 fw-light"><CopyrightIcon/>ASEAN YOUTH FORUM</p>
+      <p className="fs-6 fw-light">Copyright © FEBE28 - AYF #Tech4Impact 2022 | All Right Reserved</p>
   </section>
   </div>
   )
