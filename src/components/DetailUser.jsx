@@ -7,7 +7,7 @@ import {
   addComment,
   updatePublish,
   unPublish,
-  changeThread
+  changeThread,
 } from "../actions/userAction";
 import Form from "react-bootstrap/Form";
 import moment from "moment";
@@ -16,7 +16,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import EditThreads from "./EditThreads";
 
 function DetailUser() {
-  const [UID, setUID] = useState('')
+  const [UID, setUID] = useState("");
   const getUNAME = localStorage.getItem("USERNAME");
   const canDelete = UID === getUNAME;
   const RID = "6385e3cace9651ed571871d7";
@@ -25,10 +25,10 @@ function DetailUser() {
   const [threads, setThreads] = useState([]);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
-  
+
   const { id } = useParams();
-  const filtered = threads.filter((e)=>e._id===id)
-  
+  const filtered = threads.filter((e) => e._id === id);
+
   const date = Date.now();
 
   const {
@@ -37,17 +37,17 @@ function DetailUser() {
     addCommentsResult,
     updatePublishResult,
     unPublishResult,
-    changeThreadResult
+    changeThreadResult,
   } = useSelector((state) => state.UserReducer);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getListUser());
   }, [dispatch]);
-  
+
   useEffect(() => {
     if (getListUserResult) {
-      setUID(filtered.map((e)=> e.author.username).toString());
+      setUID(filtered.map((e) => e.author.username).toString());
     }
   }, [getListUserResult]);
 
@@ -92,8 +92,6 @@ function DetailUser() {
     }
   }, [addCommentsResult, dispatch]);
 
- 
- 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
@@ -106,8 +104,7 @@ function DetailUser() {
       )
     );
   };
- 
-  
+
   return (
     <div className="container py-5">
       {threads
@@ -129,19 +126,21 @@ function DetailUser() {
                   </div>
                   {canDelete ? (
                     <div id="dropdown" className="float-end">
-                    <Dropdown>
-                      <Dropdown.Toggle variant="white" id="dropdown-basic">
-                      <MoreHorizIcon />
-                      </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item>
-                         <EditThreads/>
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                   </div>
-                  ):""}
-                 
+                      <Dropdown>
+                        <Dropdown.Toggle variant="white" id="dropdown-basic">
+                          <MoreHorizIcon />
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                          <Dropdown.Item>
+                            <EditThreads />
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
                   {admin ? (
                     <div id="publish">
                       <p>Publish :</p>
